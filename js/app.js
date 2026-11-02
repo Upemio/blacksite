@@ -363,11 +363,31 @@
     // Attach your audio here, e.g.:
     //   window.BLACKSITE.onKnock = function () { document.getElementById("knock-song").play(); };
     // or: window.addEventListener("blacksite:knock", function () { ... });
+    function playKnock() {
+      var a = document.getElementById("knock-sound");
+      if (!a) return;
+      try {
+        var p = a.play();
+        // Browsers block audio until the user interacts with the page at least
+        // once. If it fails, retry on the first click/keypress instead of dying.
+        if (p && p.catch) p.catch(function () {
+          var retry = function () {
+            try { a.play().catch(function () {}); } catch (e) {}
+            window.removeEventListener("pointerdown", retry);
+            window.removeEventListener("keydown", retry);
+          };
+          window.addEventListener("pointerdown", retry);
+          window.addEventListener("keydown", retry);
+        });
+      } catch (e) {}
+    }
+
     function fireKnock() {
       try { window.dispatchEvent(new CustomEvent("blacksite:knock")); } catch (e) {}
       if (typeof window.BLACKSITE.onKnock === "function") {
         try { window.BLACKSITE.onKnock(); } catch (e) {}
       }
+      playKnock();
     }
 
     function typeLine(el, text, done) {
@@ -380,7 +400,7 @@
           if (!el.firstChild || el.firstChild.nodeType !== 3) el.insertBefore(document.createTextNode(""), caret);
           el.firstChild.nodeValue = text.slice(0, i);
           i++;
-          setTimeout(tick, 34 + Math.random() * 46);
+          setTimeout(tick, 70 + Math.random() * 70);
         } else done();
       })();
     }
@@ -389,8 +409,11 @@
       if (idx >= lines.length) return; // caret keeps blinking at the end
       var el = lines[idx];
       var text = el.getAttribute("data-text") || "";
-      var pause = el.classList.contains("typed-knock") ? 900 : 380;
-      setTimeout(function () { typeLine(el, text, function () { run(idx + 1); }); }, pause);
+      typeLine(el, text, function () {
+        // pause AFTER the line finishes — data-pause sets it per line
+        var wait = parseInt(el.getAttribute("data-pause") || "450", 10);
+        setTimeout(function () { run(idx + 1); }, wait);
+      });
     }
 
     if (reduceMotion || noReveal) {
