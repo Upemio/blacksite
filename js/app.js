@@ -359,26 +359,19 @@
     var caret = h1.querySelector(".typed-caret");
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // BLAKE: your song hook — this fires the moment "Knock.. Knock.." starts typing.
-    // Attach your audio here, e.g.:
-    //   window.BLACKSITE.onKnock = function () { document.getElementById("knock-song").play(); };
+    // The knock sound (assets/audio/knockknock.mp3) fires automatically here.
+    // External hook still available:
+    //   window.BLACKSITE.onKnock = function () { ... };
     // or: window.addEventListener("blacksite:knock", function () { ... });
     function playKnock() {
       var a = document.getElementById("knock-sound");
       if (!a) return;
+      // One shot, exactly on the knock. Browsers block ALL page audio until the
+      // visitor has clicked/tapped/keyed the page at least once — if it is still
+      // blocked at knock time we stay silent rather than firing seconds late.
       try {
         var p = a.play();
-        // Browsers block audio until the user interacts with the page at least
-        // once. If it fails, retry on the first click/keypress instead of dying.
-        if (p && p.catch) p.catch(function () {
-          var retry = function () {
-            try { a.play().catch(function () {}); } catch (e) {}
-            window.removeEventListener("pointerdown", retry);
-            window.removeEventListener("keydown", retry);
-          };
-          window.addEventListener("pointerdown", retry);
-          window.addEventListener("keydown", retry);
-        });
+        if (p && p.catch) p.catch(function () {});
       } catch (e) {}
     }
 
@@ -416,12 +409,24 @@
       });
     }
 
+    function startReveal() {
+      setTimeout(function () { run(0); }, 600);
+    }
+
     if (reduceMotion || noReveal) {
       lines.forEach(function (el) { el.textContent = el.getAttribute("data-text") || ""; });
       if (caret && lines.length) lines[lines.length - 1].appendChild(caret);
       fireKnock();
+    } else if (document.fonts && document.fonts.load) {
+      // Wait for Courier Prime before typing: if the webfont lands mid-reveal
+      // every line re-renders with new metrics and the caret visibly jumps.
+      var started = false;
+      var go = function () { if (!started) { started = true; startReveal(); } };
+      try { document.fonts.load('700 100px "Courier Prime"').then(go, go); }
+      catch (e) { go(); }
+      setTimeout(go, 1500); // never hold the hero hostage on a slow font fetch
     } else {
-      setTimeout(function () { run(0); }, 600);
+      startReveal();
     }
   })();
 })();
