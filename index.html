@@ -4,39 +4,46 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>BLACKSITE — The keyboard cowboys</title>
-<meta name="description" content="BLACKSITE is an independent engineering company working across artificial intelligence, cybersecurity, chaos engineering, and data intelligence." />
+<meta name="description" content="BLACKSITE is an independent engineering company working across offensive security, AI red-teaming, chaos engineering, and data forensics." />
 <meta property="og:title" content="BLACKSITE — The keyboard cowboys" />
-<meta property="og:description" content="Independent engineering across AI, cybersecurity, chaos engineering, and data intelligence." />
+<meta property="og:description" content="Independent engineering across offensive security, AI red-teaming, chaos engineering, and data forensics." />
 <meta property="og:type" content="website" />
 <meta name="theme-color" content="#090B10" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
+<!-- Animated operations-floor canvas: fixed, behind everything -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-vignette" aria-hidden="true"></div>
+
 <header class="site-nav" id="siteNav">
-  <a class="wordmark" href="#top" aria-label="BLACKSITE — home">
-    <span class="wordmark-glyph" aria-hidden="true"></span>
-    <span class="wordmark-text">BLACKSITE</span>
-  </a>
-  <nav class="nav-links" aria-label="Primary">
-    <a href="#capabilities">Capabilities</a>
-    <a href="#research">Research</a>
-    <a href="#about">About</a>
-  </nav>
-  <a class="btn btn-outline btn-nav" href="#contact">Contact</a>
-  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
-    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-  </button>
+  <div class="nav-inner">
+    <a class="wordmark" href="#top" aria-label="BLACKSITE — home">
+      <span class="wordmark-glyph" aria-hidden="true"></span>
+      <span class="wordmark-text">BLACKSITE</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#capabilities">Capabilities</a>
+      <a href="#research">Field files</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="btn btn-outline btn-nav" href="#contact">Contact</a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+  </div>
 </header>
 
 <div class="mobile-menu" id="mobileMenu" hidden>
   <nav aria-label="Mobile">
     <a href="#capabilities">Capabilities</a>
-    <a href="#research">Research</a>
+    <a href="#research">Field files</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -45,145 +52,153 @@
 <main id="main">
   <!-- HERO -->
   <section class="hero" id="top" aria-label="Introduction">
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata"
-           poster="assets/video/hero-poster.png" aria-hidden="true" tabindex="-1">
-      <source src="assets/video/hero-ambient.mp4" type="video/mp4" />
-    </video>
-    <div class="hero-inner">
-      <p class="hero-kicker reveal-hero">Independent engineering — four disciplines</p>
-      <h1 class="hero-title reveal-hero"><span class="hero-title-mask"><span>BLACKSITE</span></span></h1>
-      <p class="hero-tagline reveal-hero">The keyboard cowboys.</p>
-      <p class="hero-lede reveal-hero">Artificial intelligence, cybersecurity, chaos engineering, and data intelligence — built by hand, built to hold. Precise systems for people who build.</p>
-      <div class="hero-ctas reveal-hero">
-        <a class="btn btn-solid" href="#capabilities">View capabilities</a>
-        <a class="btn btn-outline" href="#contact">Open a channel</a>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow reveal-hero"><span class="tick" aria-hidden="true"></span>Independent engineering — Est. MMXXVI</p>
+        <h1 class="hero-title reveal-hero">The keyboard<br /><em>cowboys.</em></h1>
+        <p class="hero-lede reveal-hero">BLACKSITE is an independent engineering company working across offensive security, AI red-teaming, chaos engineering, and data forensics. Built by hand. Built to hold.</p>
+        <div class="hero-ctas reveal-hero">
+          <a class="btn btn-solid" href="#contact"><span>Open a channel</span></a>
+          <a class="btn btn-outline" href="#capabilities"><span>View capabilities</span></a>
+        </div>
+        <p class="hero-meta reveal-hero"><span class="pulse" aria-hidden="true"></span>ALL SYSTEMS NOMINAL — NIGHT SHIFT ACTIVE</p>
       </div>
+      <figure class="hero-fig reveal-hero" aria-label="Engraving of a hooded operator before a wall of watch-screens">
+        <div class="hero-fig-frame">
+          <img class="hero-fig-img" src="assets/img/hero-engraving.jpg" alt="Copperplate engraving of a hooded operator at a great wall of glowing watch-screens" fetchpriority="high" />
+          <div class="px-noise" aria-hidden="true"></div>
+        </div>
+        <figcaption class="mono-cap">FIG. 01 — THE WATCH FLOOR, AFTER MIDNIGHT</figcaption>
+      </figure>
     </div>
-    <div class="hero-strip reveal-hero" aria-hidden="true">
-      <span>Independent</span><span>4 disciplines</span><span>Est. MMXXVI</span><span>Built to hold</span>
+    <div class="hero-strip" aria-hidden="true">
+      <span>Offensive security</span><i>◆</i><span>AI red-teaming</span><i>◆</i><span>Chaos engineering</span><i>◆</i><span>Data forensics</span><i>◆</i>
+    </div>
+  </section>
+
+  <!-- SIGNAL / SHOWPIECE PARALLAX PANEL -->
+  <section class="section signal" id="signal" aria-labelledby="signal-h">
+    <div class="wrap">
+      <p class="eyebrow reveal"><span class="tick" aria-hidden="true"></span>SEC.01 — Signal</p>
+      <h2 id="signal-h" class="display reveal">We do our best work<br /><em>after midnight.</em></h2>
+      <p class="section-lede reveal">While the dashboards sleep, the attack surface stays awake. We map it, probe it, and break it — in controlled conditions, on your side of the wire.</p>
+    </div>
+    <div class="wrap signal-stage reveal">
+      <div class="px-panel" data-px-speed="1" role="img" aria-label="Engraving of a raven perched on a monolithic server tower">
+        <img class="px-img" src="assets/img/panel-omen.jpg" alt="" />
+        <div class="px-noise" aria-hidden="true"></div>
+        <div class="px-frame-line" aria-hidden="true"></div>
+      </div>
+      <aside class="terminal-card" id="terminalCard" aria-label="Demonstration terminal session against a synthetic training range">
+        <div class="term-head">
+          <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="term-title">blacksite // training range</span>
+        </div>
+        <div class="term-body" id="termBody" aria-live="polite"></div>
+      </aside>
     </div>
   </section>
 
   <!-- CAPABILITIES -->
-  <section class="section capabilities" id="capabilities" aria-labelledby="cap-h">
-    <div class="wrap">
-      <p class="kicker reveal">SEC.01 — Capabilities</p>
-      <h2 id="cap-h" class="reveal">Four disciplines. One machine.</h2>
-      <p class="section-lede reveal">BLACKSITE does not sell services off a shelf. Four practices feed one another — models harden the defenses, breakage teaches the models, data carries the evidence. Select a node.</p>
-
-      <div class="capsys reveal">
-        <video class="capsys-video" autoplay muted loop playsinline preload="metadata"
-               poster="assets/video/field-poster.png" aria-hidden="true" tabindex="-1">
-          <source src="assets/video/field-loop.mp4" type="video/mp4" />
-        </video>
-        <svg class="capsys-svg" viewBox="0 0 800 520" role="group" aria-label="Discipline diagram. Four disciplines connected to the BLACKSITE core.">
-          <g class="wire" aria-hidden="true">
-            <line id="wire-ai" x1="400" y1="228" x2="150" y2="128" />
-            <line id="wire-sec" x1="400" y1="228" x2="650" y2="128" />
-            <line id="wire-chaos" x1="400" y1="292" x2="150" y2="392" />
-            <line id="wire-data" x1="400" y1="292" x2="650" y2="392" />
-          </g>
-          <g id="node-core" class="node node-core" aria-hidden="true">
-            <rect x="300" y="228" width="200" height="64" />
-            <text x="400" y="267">BLACKSITE</text>
-          </g>
-          <g id="node-ai" class="node" tabindex="0" role="button" aria-pressed="true" aria-label="Artificial intelligence">
-            <rect x="60" y="100" width="180" height="56" /><text x="150" y="135">AI</text>
-          </g>
-          <g id="node-sec" class="node" tabindex="0" role="button" aria-pressed="false" aria-label="Cybersecurity">
-            <rect x="560" y="100" width="180" height="56" /><text x="650" y="135">CYBER</text>
-          </g>
-          <g id="node-chaos" class="node" tabindex="0" role="button" aria-pressed="false" aria-label="Chaos engineering">
-            <rect x="60" y="364" width="180" height="56" /><text x="150" y="399">CHAOS</text>
-          </g>
-          <g id="node-data" class="node" tabindex="0" role="button" aria-pressed="false" aria-label="Data intelligence">
-            <rect x="560" y="364" width="180" height="56" /><text x="650" y="399">DATA</text>
-          </g>
-        </svg>
-        <div class="capsys-list" aria-label="Disciplines">
-          <button type="button" data-disc="ai" aria-pressed="true">AI</button>
-          <button type="button" data-disc="sec" aria-pressed="false">CYBER</button>
-          <button type="button" data-disc="chaos" aria-pressed="false">CHAOS</button>
-          <button type="button" data-disc="data" aria-pressed="false">DATA</button>
+  <div class="band band-surface">
+    <section class="section capabilities" id="capabilities" aria-labelledby="cap-h">
+      <div class="wrap">
+        <p class="eyebrow reveal"><span class="tick" aria-hidden="true"></span>SEC.02 — Capabilities</p>
+        <h2 id="cap-h" class="display reveal">Four disciplines.<br /><em>One machine.</em></h2>
+        <p class="section-lede reveal">BLACKSITE does not sell services off a shelf. Four practices feed one another — the models harden the defenses, the breakage teaches the models, the data carries the evidence.</p>
+        <div class="cap-grid">
+          <article class="cap-card reveal" tabindex="0">
+            <div class="cap-media"><img src="assets/img/cap-recon.jpg" alt="Engraving of a great eye emerging from circuit labyrinths" loading="lazy" /></div>
+            <p class="cap-num">#1 — RECON</p>
+            <h3>Offensive Security</h3>
+            <p>Attack-surface mapping, adversary simulation, and vulnerability research — conducted against your systems, with your permission, before someone else does it without.</p>
+          </article>
+          <article class="cap-card reveal" tabindex="0">
+            <div class="cap-media cap-media-red"><img src="assets/img/cap-breach.jpg" alt="Engraving of a breached fortress wall revealing circuitry within" loading="lazy" /></div>
+            <p class="cap-num">#2 — BREACH</p>
+            <h3>AI Red-Teaming</h3>
+            <p>We break machine-intelligence systems on purpose — prompt injection, jailbreak resistance, agentic tool-use abuse — so the failure happens in our lab, never in your production.</p>
+          </article>
+          <article class="cap-card reveal" tabindex="0">
+            <div class="cap-media"><img src="assets/img/cap-persist.jpg" alt="Engraving of a cable serpent coiled around a dark obelisk" loading="lazy" /></div>
+            <p class="cap-num">#3 — PERSIST</p>
+            <h3>Chaos Engineering</h3>
+            <p>Controlled fault injection and resilience proving. We take systems down in the lab, on schedule, so they stay up in the world when it counts.</p>
+          </article>
+          <article class="cap-card reveal" tabindex="0">
+            <div class="cap-media"><img src="assets/img/cap-exfil.jpg" alt="Engraving of ravens carrying streams of light from a dark citadel" loading="lazy" /></div>
+            <p class="cap-num">#4 — EXFIL</p>
+            <h3>Data Forensics</h3>
+            <p>Breach analysis, evidence preservation, and data pipelines that answer the only questions that matter after an incident: what left, when, and how.</p>
+          </article>
         </div>
       </div>
-
-      <div class="cap-detail reveal" id="capDetail" aria-live="polite">
-        <div class="cap-detail-head">
-          <h3 id="capName">Artificial Intelligence</h3>
-          <span class="cap-code" id="capCode">DISC/AI</span>
-        </div>
-        <p id="capDesc"></p>
-        <ul class="cap-focus" id="capFocus"></ul>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="metadata" poster="assets/video/divider-poster.png" tabindex="-1">
-      <source src="assets/video/divider-sweep.mp4" type="video/mp4" />
-    </video>
+    </section>
   </div>
 
-  <!-- RESEARCH -->
+  <!-- FIELD FILES -->
   <section class="section research" id="research" aria-labelledby="res-h">
     <div class="wrap">
-      <p class="kicker reveal">SEC.02 — Field files</p>
-      <h2 id="res-h" class="reveal">Research &amp; projects</h2>
-      <p class="section-lede reveal">Experiments, instruments, and software, published as they ship. Field files appear here as work completes — the entries below are placeholders holding their positions. Nothing here claims a client, a result, or a credential it has not earned.</p>
+      <p class="eyebrow reveal"><span class="tick" aria-hidden="true"></span>SEC.03 — Field files</p>
+      <h2 id="res-h" class="display reveal">Research,<br /><em>as it ships.</em></h2>
+      <p class="section-lede reveal">Experiments, instruments, and software, published as they ship. The entries below are placeholders holding their positions — nothing here claims a client, a result, or a credential it has not earned.</p>
+    </div>
+    <div class="wrap">
+      <div class="px-panel px-panel-strip reveal" data-px-speed="0.7" role="img" aria-label="Engraving detail of the watch floor">
+        <img class="px-img" src="assets/img/hero-engraving.jpg" alt="" />
+        <div class="px-noise" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="wrap">
       <div class="files" id="fileList"></div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section class="section about" id="about" aria-labelledby="about-h">
-    <div class="wrap">
-      <p class="kicker reveal">SEC.03 — About</p>
-      <h2 id="about-h" class="reveal">An independent engineering company.</h2>
-      <div class="about-grid">
-        <div class="about-statement reveal">
-          <p>BLACKSITE is a small engineering company working where systems get complicated — machine intelligence, adversarial security, deliberate breakage, and the data underneath it all.</p>
-          <p>We build suites of tools for small businesses and independent developers. Small by design, precise by habit. No theater, no borrowed credibility, no surveillance machinery. Software that holds under pressure, built by people who answer for it.</p>
-          <p class="about-sign">— The keyboard cowboys.</p>
-        </div>
-        <div class="about-creed reveal">
-          <div class="creed-col">
-            <h3>We are</h3>
-            <ul>
-              <li>Independent — no parent company, no investors to perform for</li>
-              <li>Precise — measured claims, tested systems</li>
-              <li>Experimental — we break things on purpose, in controlled conditions</li>
-              <li>Restrained — small surface area, sharp edges</li>
-            </ul>
+  <div class="band band-deep">
+    <section class="section about" id="about" aria-labelledby="about-h">
+      <div class="wrap">
+        <p class="eyebrow reveal"><span class="tick" aria-hidden="true"></span>SEC.04 — About</p>
+        <h2 id="about-h" class="display reveal">An independent<br /><em>engineering company.</em></h2>
+        <div class="about-grid">
+          <div class="about-statement reveal">
+            <p>BLACKSITE is a small engineering company working where systems get complicated — machine intelligence, adversarial security, deliberate breakage, and the data underneath it all.</p>
+            <p>Small by design, precise by habit. No theater, no borrowed credibility, no surveillance machinery. Software that holds under pressure, built by people who answer for it.</p>
+            <p class="about-sign">— The keyboard cowboys.</p>
           </div>
-          <div class="creed-col">
-            <h3>We refuse</h3>
-            <ul>
-              <li>Bloat sold as capability</li>
-              <li>Security theater</li>
-              <li>Credentials we have not earned</li>
-              <li>Software that watches its users</li>
-            </ul>
+          <div class="about-creed reveal">
+            <div class="creed-col">
+              <h3>We are</h3>
+              <ul>
+                <li>Independent — no parent company, no investors to perform for</li>
+                <li>Precise — measured claims, tested systems</li>
+                <li>Experimental — we break things on purpose, in controlled conditions</li>
+                <li>Restrained — small surface area, sharp edges</li>
+              </ul>
+            </div>
+            <div class="creed-col">
+              <h3>We refuse</h3>
+              <ul>
+                <li>Bloat sold as capability</li>
+                <li>Security theater</li>
+                <li>Credentials we have not earned</li>
+                <li>Software that watches its users</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <div class="divider" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="metadata" poster="assets/video/divider-poster.png" tabindex="-1">
-      <source src="assets/video/divider-sweep.mp4" type="video/mp4" />
-    </video>
+    </section>
   </div>
 
   <!-- CONTACT -->
   <section class="section contact" id="contact" aria-labelledby="con-h">
-    <div class="wrap">
-      <p class="kicker reveal">SEC.04 — Contact</p>
-      <h2 id="con-h" class="reveal">Open a channel.</h2>
-      <p class="section-lede reveal">Commissions, research inquiries, and everything else start the same way: a direct message, no forms, no trackers. Tell us what you are building and what is breaking.</p>
+    <div class="wrap contact-inner">
+      <p class="eyebrow reveal"><span class="tick" aria-hidden="true"></span>SEC.05 — Contact</p>
+      <h2 id="con-h" class="display reveal">Open a<br /><em>channel.</em></h2>
+      <p class="section-lede reveal">Commissions, research inquiries, and everything else start the same way: a direct message. No forms, no trackers. Tell us what you are building — and what is breaking.</p>
       <div class="contact-actions reveal">
-        <a class="btn btn-solid btn-large" href="mailto:contact@blacksite.dev?subject=BLACKSITE%20inquiry">Write to contact@blacksite.dev</a>
+        <a class="btn btn-solid btn-large" href="mailto:contact@blacksite.dev?subject=BLACKSITE%20inquiry"><span>Write to contact@blacksite.dev</span></a>
       </div>
       <p class="contact-note reveal">This site runs no backend. The button opens your mail client with the address filled in — nothing is submitted, nothing is stored.</p>
     </div>
@@ -191,18 +206,18 @@
 </main>
 
 <footer class="site-footer">
-  <div class="wrap footer-grid">
-    <a class="wordmark" href="#top" aria-label="BLACKSITE — back to top">
-      <span class="wordmark-glyph" aria-hidden="true"></span>
-      <span class="wordmark-text">BLACKSITE</span>
-    </a>
-    <nav aria-label="Footer">
-      <a href="#capabilities">Capabilities</a>
-      <a href="#research">Research</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <p class="footer-small">© MMXXVI BLACKSITE. The keyboard cowboys.</p>
+  <div class="wrap">
+    <p class="footer-giant" aria-hidden="true">BLACKSITE</p>
+    <div class="footer-grid">
+      <nav aria-label="Footer">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#research">Field files</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <p class="footer-small">© MMXXVI BLACKSITE.<br />The keyboard cowboys.</p>
+      <p class="footer-small footer-right">NO TRACKERS.<br />NO COOKIES. NO THEATER.</p>
+    </div>
   </div>
 </footer>
 
