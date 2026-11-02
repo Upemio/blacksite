@@ -349,4 +349,56 @@
       revealIO.observe(art);
     });
   }
+
+  /* ============ hero Matrix typing ============ */
+  window.BLACKSITE = window.BLACKSITE || {};
+  (function () {
+    var h1 = document.querySelector(".hero-typed");
+    if (!h1) return;
+    var lines = Array.prototype.slice.call(h1.querySelectorAll(".typed-line"));
+    var caret = h1.querySelector(".typed-caret");
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // BLAKE: your song hook — this fires the moment "Knock.. Knock.." starts typing.
+    // Attach your audio here, e.g.:
+    //   window.BLACKSITE.onKnock = function () { document.getElementById("knock-song").play(); };
+    // or: window.addEventListener("blacksite:knock", function () { ... });
+    function fireKnock() {
+      try { window.dispatchEvent(new CustomEvent("blacksite:knock")); } catch (e) {}
+      if (typeof window.BLACKSITE.onKnock === "function") {
+        try { window.BLACKSITE.onKnock(); } catch (e) {}
+      }
+    }
+
+    function typeLine(el, text, done) {
+      if (el.classList.contains("typed-knock")) fireKnock();
+      el.appendChild(caret); // caret follows the typing
+      var i = 0;
+      (function tick() {
+        if (i <= text.length) {
+          // keep caret last: type into a text node before it
+          if (!el.firstChild || el.firstChild.nodeType !== 3) el.insertBefore(document.createTextNode(""), caret);
+          el.firstChild.nodeValue = text.slice(0, i);
+          i++;
+          setTimeout(tick, 34 + Math.random() * 46);
+        } else done();
+      })();
+    }
+
+    function run(idx) {
+      if (idx >= lines.length) return; // caret keeps blinking at the end
+      var el = lines[idx];
+      var text = el.getAttribute("data-text") || "";
+      var pause = el.classList.contains("typed-knock") ? 900 : 380;
+      setTimeout(function () { typeLine(el, text, function () { run(idx + 1); }); }, pause);
+    }
+
+    if (reduceMotion || noReveal) {
+      lines.forEach(function (el) { el.textContent = el.getAttribute("data-text") || ""; });
+      if (caret && lines.length) lines[lines.length - 1].appendChild(caret);
+      fireKnock();
+    } else {
+      setTimeout(function () { run(0); }, 600);
+    }
+  })();
 })();
