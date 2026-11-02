@@ -384,13 +384,14 @@
       if (el.classList.contains("typed-knock")) fireKnock();
       el.appendChild(caret); // caret follows the typing
       var i = 0;
+      var fast = el.classList.contains("typed-knock"); // the knock raps out quick
       (function tick() {
         if (i <= text.length) {
           // keep caret last: type into a text node before it
           if (!el.firstChild || el.firstChild.nodeType !== 3) el.insertBefore(document.createTextNode(""), caret);
           el.firstChild.nodeValue = text.slice(0, i);
           i++;
-          setTimeout(tick, 70 + Math.random() * 70);
+          setTimeout(tick, fast ? 22 + Math.random() * 22 : 70 + Math.random() * 70);
         } else done();
       })();
     }
