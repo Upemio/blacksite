@@ -27,7 +27,7 @@
   var streaks = [];
   var NSTREAK = isMobile ? 11 : 21;
   for (var i = 0; i < NSTREAK; i++) {
-    var red = Math.random() < 0.18;
+    var red = Math.random() < 0.82;
     var len = 220 + Math.random() * 520;
     streaks.push({
       x: Math.random() * W, y: Math.random() * H,
@@ -61,13 +61,13 @@
     return c;
   }
   var nebulas = [
-    { img: nebulaSprite(420, [[0, "rgba(0,212,255,0.10)"], [1, "rgba(0,212,255,0)"]]),
+    { img: nebulaSprite(420, [[0, "rgba(255,48,79,0.10)"], [1, "rgba(255,48,79,0)"]]),
       bx: 0.22, by: 0.28, ax: 0.10, ay: 0.07, s1: 0.11, s2: 0.07, p: 0.0 },
     { img: nebulaSprite(520, [[0, "rgba(0,90,160,0.10)"], [1, "rgba(0,90,160,0)"]]),
       bx: 0.78, by: 0.62, ax: 0.08, ay: 0.10, s1: 0.07, s2: 0.13, p: 2.1 },
-    { img: nebulaSprite(360, [[0, "rgba(255,48,79,0.07)"], [1, "rgba(255,48,79,0)"]]),
+    { img: nebulaSprite(360, [[0, "rgba(0,212,255,0.07)"], [1, "rgba(0,212,255,0)"]]),
       bx: 0.62, by: 0.18, ax: 0.12, ay: 0.06, s1: 0.09, s2: 0.05, p: 4.2 },
-    { img: nebulaSprite(460, [[0, "rgba(0,212,255,0.06)"], [1, "rgba(0,212,255,0)"]]),
+    { img: nebulaSprite(460, [[0, "rgba(255,48,79,0.06)"], [1, "rgba(255,48,79,0)"]]),
       bx: 0.35, by: 0.80, ax: 0.07, ay: 0.09, s1: 0.13, s2: 0.08, p: 5.5 }
   ];
 
@@ -82,7 +82,7 @@
       sway: 10 + Math.random() * 30, sws: 0.3 + Math.random() * 0.9,
       ph: Math.random() * Math.PI * 2,
       sz: 0.8 + Math.random() * 1.8,
-      col: r2 < 0.72 ? "0,212,255" : (r2 < 0.9 ? "200,235,255" : "255,48,79"),
+      col: r2 < 0.72 ? "255,48,79" : (r2 < 0.9 ? "255,225,225" : "0,212,255"),
       a: 0.25 + Math.random() * 0.55
     });
   }
@@ -123,10 +123,10 @@
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
     var cg = ctx.createConicGradient(radarAng, rx, ry);
-    cg.addColorStop(0, "rgba(0,212,255,0)");
-    cg.addColorStop(0.82, "rgba(0,212,255,0)");
-    cg.addColorStop(0.97, "rgba(0,212,255,0.085)");
-    cg.addColorStop(1, "rgba(0,212,255,0)");
+    cg.addColorStop(0, "rgba(255,48,79,0)");
+    cg.addColorStop(0.82, "rgba(255,48,79,0)");
+    cg.addColorStop(0.97, "rgba(255,48,79,0.085)");
+    cg.addColorStop(1, "rgba(255,48,79,0)");
     ctx.fillStyle = cg;
     ctx.beginPath();
     ctx.moveTo(rx, ry);
@@ -162,15 +162,15 @@
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
     var sg = ctx.createLinearGradient(0, sweepY - 130, 0, sweepY + 130);
-    sg.addColorStop(0, "rgba(0,212,255,0)");
-    sg.addColorStop(0.5, "rgba(0,212,255,0.10)");
-    sg.addColorStop(1, "rgba(0,212,255,0)");
+    sg.addColorStop(0, "rgba(255,48,79,0)");
+    sg.addColorStop(0.5, "rgba(255,48,79,0.10)");
+    sg.addColorStop(1, "rgba(255,48,79,0)");
     ctx.fillStyle = sg;
     ctx.fillRect(0, sweepY - 130, W, 260);
     var sg2 = ctx.createLinearGradient(sweepX - 170, 0, sweepX + 170, 0);
-    sg2.addColorStop(0, "rgba(255,48,79,0)");
-    sg2.addColorStop(0.5, "rgba(255,48,79,0.05)");
-    sg2.addColorStop(1, "rgba(255,48,79,0)");
+    sg2.addColorStop(0, "rgba(0,212,255,0)");
+    sg2.addColorStop(0.5, "rgba(0,212,255,0.05)");
+    sg2.addColorStop(1, "rgba(0,212,255,0)");
     ctx.fillStyle = sg2;
     ctx.fillRect(sweepX - 170, 0, 340, H);
     ctx.restore();
