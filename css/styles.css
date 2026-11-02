@@ -198,6 +198,11 @@ a { color: inherit; }
   box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6), 0 0 80px rgba(255, 48, 79, 0.07);
 }
 .hero-fig-frame.px-panel { height: clamp(380px, 52vw, 620px); }
+/* hero keeps the scroll-drift but near-original framing: smaller zoom than .px-img */
+.hero-fig-frame .px-img {
+  top: 0; height: 100%;
+  transform: translate3d(0, var(--py-img, 0px), 0) scale(1.2);
+}
 .mono-cap {
   font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; color: var(--muted);
   margin: 14px 2px 0;

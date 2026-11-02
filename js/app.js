@@ -356,14 +356,6 @@
     var caret = h1.querySelector(".typed-caret");
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Browsers block ALL page audio until the visitor clicks/taps/keys once.
-    // Track the first gesture so the knock can wait for it and land in sync.
-    var audioUnlocked = false;
-    function unlockAudio() { audioUnlocked = true; }
-    window.addEventListener("pointerdown", unlockAudio, { once: true });
-    window.addEventListener("keydown", unlockAudio, { once: true });
-    window.addEventListener("touchstart", unlockAudio, { once: true });
-
     // The knock sound (assets/audio/knockknock.mp3) fires automatically here.
     // External hook still available:
     //   window.BLACKSITE.onKnock = function () { ... };
@@ -407,31 +399,11 @@
       if (idx >= lines.length) return; // caret keeps blinking at the end
       var el = lines[idx];
       var text = el.getAttribute("data-text") || "";
-      var proceed = function () {
-        typeLine(el, text, function () {
-          // pause AFTER the line finishes — data-pause sets it per line
-          var wait = parseInt(el.getAttribute("data-pause") || "450", 10);
-          setTimeout(function () { run(idx + 1); }, wait);
-        });
-      };
-      if (el.classList.contains("typed-knock") && !audioUnlocked) {
-        // Hold the knock for the visitor's first click/tap/key (max 8s) so the
-        // sound fires in sync with the text — never seconds late, never silent
-        // when they did interact. The blinking cursor waits on "dark side.".
-        var fired = false;
-        var go = function () {
-          if (fired) return; fired = true;
-          audioUnlocked = true;
-          window.removeEventListener("pointerdown", go);
-          window.removeEventListener("keydown", go);
-          proceed();
-        };
-        window.addEventListener("pointerdown", go);
-        window.addEventListener("keydown", go);
-        setTimeout(go, 8000);
-      } else {
-        proceed();
-      }
+      typeLine(el, text, function () {
+        // pause AFTER the line finishes — data-pause sets it per line
+        var wait = parseInt(el.getAttribute("data-pause") || "450", 10);
+        setTimeout(function () { run(idx + 1); }, wait);
+      });
     }
 
     function startReveal() {
