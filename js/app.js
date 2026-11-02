@@ -192,7 +192,6 @@
 
   /* ============ unified rAF: canvas + parallax + nav ============ */
   var nav = document.getElementById("siteNav");
-  var heroFig = document.querySelector(".hero-fig");
   var termCard = document.getElementById("terminalCard");
   var pxPanels = Array.prototype.slice.call(document.querySelectorAll(".px-panel"));
   var pxIO = new IntersectionObserver(function (es) {
@@ -220,8 +219,6 @@
       var sp = parseFloat(p.getAttribute("data-px-speed") || "1");
       p.style.setProperty("--py-img", (prog * 64 * sp).toFixed(1) + "px");
     }
-    // hero illustration lag
-    if (heroFig) heroFig.style.setProperty("--py-hero", (y * 0.14).toFixed(1) + "px");
     // terminal card differential drift
     if (termCard) termCard.style.setProperty("--py-card", (y * -0.05).toFixed(1) + "px");
 
@@ -359,6 +356,14 @@
     var caret = h1.querySelector(".typed-caret");
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // Browsers block ALL page audio until the visitor clicks/taps/keys once.
+    // Track the first gesture so the knock can wait for it and land in sync.
+    var audioUnlocked = false;
+    function unlockAudio() { audioUnlocked = true; }
+    window.addEventListener("pointerdown", unlockAudio, { once: true });
+    window.addEventListener("keydown", unlockAudio, { once: true });
+    window.addEventListener("touchstart", unlockAudio, { once: true });
+
     // The knock sound (assets/audio/knockknock.mp3) fires automatically here.
     // External hook still available:
     //   window.BLACKSITE.onKnock = function () { ... };
@@ -402,11 +407,31 @@
       if (idx >= lines.length) return; // caret keeps blinking at the end
       var el = lines[idx];
       var text = el.getAttribute("data-text") || "";
-      typeLine(el, text, function () {
-        // pause AFTER the line finishes — data-pause sets it per line
-        var wait = parseInt(el.getAttribute("data-pause") || "450", 10);
-        setTimeout(function () { run(idx + 1); }, wait);
-      });
+      var proceed = function () {
+        typeLine(el, text, function () {
+          // pause AFTER the line finishes — data-pause sets it per line
+          var wait = parseInt(el.getAttribute("data-pause") || "450", 10);
+          setTimeout(function () { run(idx + 1); }, wait);
+        });
+      };
+      if (el.classList.contains("typed-knock") && !audioUnlocked) {
+        // Hold the knock for the visitor's first click/tap/key (max 8s) so the
+        // sound fires in sync with the text — never seconds late, never silent
+        // when they did interact. The blinking cursor waits on "dark side.".
+        var fired = false;
+        var go = function () {
+          if (fired) return; fired = true;
+          audioUnlocked = true;
+          window.removeEventListener("pointerdown", go);
+          window.removeEventListener("keydown", go);
+          proceed();
+        };
+        window.addEventListener("pointerdown", go);
+        window.addEventListener("keydown", go);
+        setTimeout(go, 8000);
+      } else {
+        proceed();
+      }
     }
 
     function startReveal() {
