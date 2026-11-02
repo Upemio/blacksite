@@ -13,7 +13,7 @@
   --red: #FF304F;
   --red-dim: rgba(255, 48, 79, 0.12);
   --border: #303846;
-  --serif: "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif;
+  --serif: "Playfair Display", Georgia, serif;
   --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
   --sans: "Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
   --wrap: 1240px;
@@ -75,7 +75,7 @@ a { color: inherit; }
 }
 .eyebrow .tick { width: 34px; height: 1px; background: var(--accent); flex: none; }
 .display {
-  font-family: var(--serif); font-weight: 300;
+  font-family: var(--serif); font-weight: 600;
   font-size: clamp(3rem, 8.5vw, 7.5rem);
   line-height: 0.98; letter-spacing: -0.01em; margin: 0 0 28px;
   text-wrap: balance;
@@ -169,8 +169,8 @@ a { color: inherit; }
   align-items: center; width: 100%;
 }
 .hero-title {
-  font-family: var(--serif); font-weight: 300;
-  font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(2.2rem, 5.2vw, 3.9rem);
   line-height: 1.02; letter-spacing: 0.01em; margin: 0 0 30px;
 }
 .hero-title em { font-style: italic; color: var(--accent); text-shadow: 0 0 60px rgba(255, 48, 79, 0.35); }
@@ -292,7 +292,7 @@ a { color: inherit; }
 }
 .cap-card:nth-child(2) .cap-num { color: var(--red); }
 .cap-card h3 {
-  font-family: var(--serif); font-weight: 400; font-size: 30px; line-height: 1.05;
+  font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.05;
   margin: 0 26px 14px; letter-spacing: 0;
 }
 .cap-card p:last-child { margin: 0 26px; color: var(--muted); font-size: 14.5px; line-height: 1.7; }
@@ -311,7 +311,7 @@ a { color: inherit; }
 .file-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .file-head { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
 .file-id { font-family: var(--mono); font-size: 11px; letter-spacing: 0.26em; color: var(--muted); }
-.file-codename { font-family: var(--serif); font-size: 30px; font-weight: 400; margin: 0; }
+.file-codename { font-family: var(--serif); font-size: 30px; font-weight: 600; margin: 0; }
 .file-disc { font-family: var(--mono); font-size: 10px; letter-spacing: 0.26em; color: var(--accent); }
 .flag {
   font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.24em;
@@ -324,7 +324,7 @@ a { color: inherit; }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 90px); margin-top: 20px; }
 .about-statement p { color: var(--muted); font-size: 17px; line-height: 1.8; margin: 0 0 22px; }
 .about-statement p:first-child { color: var(--text); font-size: 21px; line-height: 1.65; font-weight: 500; }
-.about-sign { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--accent); }
+.about-sign { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 22px; color: var(--accent); }
 .about-creed { display: grid; gap: 40px; }
 .creed-col h3 {
   font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.32em;
@@ -349,7 +349,7 @@ a { color: inherit; }
 /* ---------- footer ---------- */
 .site-footer { background: var(--bg-deep); border-top: 1px solid var(--border); padding: 90px 0 46px; position: relative; overflow: hidden; }
 .footer-giant {
-  font-family: var(--serif); font-weight: 300; font-size: clamp(3.4rem, 13.5vw, 12rem);
+  font-family: var(--serif); font-weight: 700; font-size: clamp(3.4rem, 13.5vw, 12rem);
   line-height: 0.9; letter-spacing: 0.02em; margin: 0 0 60px; color: var(--text);
   opacity: 0.94; user-select: none;
   background: linear-gradient(180deg, #E4E8ED 30%, #4A5462 100%);
