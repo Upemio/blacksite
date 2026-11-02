@@ -201,8 +201,14 @@ a { color: inherit; }
 /* hero keeps the scroll-drift; strong travel needs zoom headroom so edges never peek */
 .hero-fig-frame .px-img {
   top: 0; height: 100%;
-  transform: translate3d(0, var(--py-img, 0px), 0) scale(1.55);
+  transform: translate3d(0, var(--py-img, 0px), 0) scale(var(--py-zoom, 1.55));
 }
+.hero-zoom-readout {
+  position: absolute; top: 14px; left: 16px; z-index: 3; pointer-events: none;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em;
+  color: var(--muted); opacity: 0.85;
+}
+.hero-zoom-readout b { color: var(--accent); font-weight: 600; }
 .mono-cap {
   font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; color: var(--muted);
   margin: 14px 2px 0;

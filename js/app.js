@@ -198,6 +198,9 @@
     es.forEach(function (en) { en.target._px = en.isIntersecting; });
   }, { threshold: 0 });
   pxPanels.forEach(function (p) { pxIO.observe(p); });
+  // recon-camera zoom refs — header image only
+  var heroFrame = document.querySelector(".hero-fig-frame");
+  var heroZoomNum = heroFrame ? heroFrame.querySelector(".hero-zoom-readout b") : null;
 
   var last = performance.now();
   function loop(now) {
@@ -218,6 +221,15 @@
       prog = Math.max(-1, Math.min(1, prog));
       var sp = parseFloat(p.getAttribute("data-px-speed") || "1");
       p.style.setProperty("--py-img", (prog * 64 * sp).toFixed(1) + "px");
+    }
+    // hero recon-camera zoom — slow telephoto breathing (14s cycle), header image only
+    if (heroFrame && heroFrame._px && !reduceMotion) {
+      var zc = 1.55 + 0.22 * (0.5 - 0.5 * Math.cos(now * (Math.PI * 2 / 14000)));
+      heroFrame.style.setProperty("--py-zoom", zc.toFixed(3));
+      if (heroZoomNum) {
+        var zl = zc.toFixed(1) + "x";
+        if (heroZoomNum._last !== zl) { heroZoomNum._last = zl; heroZoomNum.textContent = zl; }
+      }
     }
     // terminal card differential drift
     if (termCard) termCard.style.setProperty("--py-card", (y * -0.05).toFixed(1) + "px");
