@@ -170,8 +170,8 @@ a { color: inherit; }
 }
 .hero-title {
   font-family: var(--serif); font-weight: 300;
-  font-size: clamp(3.6rem, 9.5vw, 8.5rem);
-  line-height: 0.95; letter-spacing: -0.015em; margin: 0 0 30px;
+  font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+  line-height: 1.02; letter-spacing: 0.01em; margin: 0 0 30px;
 }
 .hero-title em { font-style: italic; color: var(--accent); text-shadow: 0 0 60px rgba(0, 212, 255, 0.35); }
 .hero-lede { max-width: 480px; color: var(--muted); font-size: 17px; line-height: 1.75; margin: 0 0 40px; }
@@ -283,7 +283,7 @@ a { color: inherit; }
   transform: translateY(-6px); border-color: rgba(0, 212, 255, 0.55);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), 0 0 40px rgba(0, 212, 255, 0.1);
 }
-.cap-media { overflow: hidden; aspect-ratio: 4 / 3; border-bottom: 1px solid var(--border); }
+.cap-media { overflow: hidden; aspect-ratio: 4 / 3; border-bottom: 1px solid var(--border); background: var(--surface-2); }
 .cap-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .cap-card:hover .cap-media img { transform: scale(1.06); }
 .cap-num {
@@ -366,7 +366,7 @@ a { color: inherit; }
 .footer-right { text-align: right; }
 
 /* ---------- reveal ---------- */
-.reveal, .reveal-hero { opacity: 0; transform: translateY(30px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: var(--d, 0s); }
+.reveal, .reveal-hero { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: var(--d, 0s); }
 .reveal.in, .reveal-hero.in { opacity: 1; transform: none; }
 .hero-fig.reveal-hero { opacity: 0; transform: translate3d(0, var(--py-hero, 0px), 0); transition: opacity 1s ease; transition-delay: var(--d, 0s); }
 .hero-fig.reveal-hero.in { opacity: 1; transform: translate3d(0, var(--py-hero, 0px), 0); }

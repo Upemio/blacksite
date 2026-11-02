@@ -240,7 +240,7 @@
         revealIO.unobserve(en.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+  }, { threshold: 0.05, rootMargin: "500px 0px 500px 0px" });
 
   function staggerize(scope) {
     var items = scope.querySelectorAll(".reveal:not([data-staggered]), .reveal-hero:not([data-staggered])");
